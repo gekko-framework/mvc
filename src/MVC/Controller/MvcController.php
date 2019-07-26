@@ -39,7 +39,7 @@ abstract class MvcController implements IHttpController
     }
 
     abstract protected function viewPath() : string;
-    abstract protected function layoutName() : string;
+    abstract protected function layoutName() : ?string;
 
     protected function view($viewName)
     {

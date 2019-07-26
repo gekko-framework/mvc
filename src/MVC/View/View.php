@@ -42,12 +42,14 @@ class View implements IView
         $this->binds = $binds;
     }
 
-    public function bind($varname, $value)
+    public function bind($varname, $value) : self
     {
         if (in_array($varname, self::$reservedVars)) {
             throw new \Exception("{$varname} is a reserverd variable. Please choose a different name");
         }
         $this->binds[$varname] = $value;
+
+        return $this;
     }
 
     protected function uri(?string $file = null) : string
@@ -57,7 +59,7 @@ class View implements IView
 
     protected function fullpath(?string $file = null) : string
     {
-        return $this->route->rootDir() . DIRECTORY_SEPARATOR . $this->viewDir . DIRECTORY_SEPARATOR . ($file ?? "");
+        return $this->route->toLocalPath($this->viewDir . DIRECTORY_SEPARATOR . ($file ?? ""));
     }
 
     public function render() : string

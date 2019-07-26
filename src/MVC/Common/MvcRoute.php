@@ -32,9 +32,9 @@ class MvcRoute
         return $this->request->getRootUri();
     }
 
-    public function rootDir() : string
+    public function toLocalPath(string $path) : string
     {
-        return $this->request->getRootDir();
+        return $this->request->toLocalPath($path);
     }
 
     public function hostname() : string
@@ -44,7 +44,7 @@ class MvcRoute
 
     public function link($uri): string
     {
-        return $this->request->getRootUri($uri);
+        return $this->request->toUri($uri);
     }
 
     public function rellink($uri) : string
@@ -53,7 +53,7 @@ class MvcRoute
         if ($routeBaseUrl[strlen($routeBaseUrl)-1] != '/' && $uri[0] != '/') {
             $routeBaseUrl .= "/";
         }
-        return $this->request->getRootUri("{$routeBaseUrl}{$uri}");
+        return $this->request->toUri("{$routeBaseUrl}{$uri}");
     }
 
     public function isRootUri(): bool
