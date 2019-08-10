@@ -52,6 +52,11 @@ class View implements IView
         return $this;
     }
 
+    public function exists() : bool
+    {
+        return \file_exists($this->fullpath($this->filename . ".php"));
+    }
+
     protected function uri(?string $file = null) : string
     {
         return str_replace(DIRECTORY_SEPARATOR, "/", $this->route->rootUri() . $this->viewDir . "/" . ($file != null ? $file : ""));
