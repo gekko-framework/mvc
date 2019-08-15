@@ -27,6 +27,11 @@ class MvcRoute
         $this->route = $route;
     }
 
+    public function getHttpRequest() : \Gekko\Http\IHttpRequest
+    {
+        return $this->request;
+    }
+
     public function rootUri() : string
     {
         return $this->request->getRootUri();
@@ -49,11 +54,7 @@ class MvcRoute
 
     public function rellink($uri) : string
     {
-        $routeBaseUrl = $this->route->getRoutingMap()->getBaseUrl();
-        if ($routeBaseUrl[strlen($routeBaseUrl)-1] != '/' && $uri[0] != '/') {
-            $routeBaseUrl .= "/";
-        }
-        return $this->request->toUri("{$routeBaseUrl}{$uri}");
+        return $this->request->toRelativeUri($uri);
     }
 
     public function isRootUri(): bool
