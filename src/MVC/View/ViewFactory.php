@@ -25,7 +25,7 @@ class ViewFactory
         $this->request = $this->injector->make(\Gekko\Http\IHttpRequest::class);
     }
 
-    public function create(\Gekko\MVC\Common\MvcRoute $route, string $viewDir, ?string $layout, string $view) : IView
+    public function create(\Gekko\MVC\Common\MvcRoute $route, string $viewDir, ?string $layout, string $view) : View
     {
         if (!empty($layout)) {
             return (new \Gekko\MVC\View\Layout($route, $viewDir, $layout, $view));
